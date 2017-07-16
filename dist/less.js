@@ -43,15 +43,63 @@
     _listeners: [],
   }
 
-  function _classCallCheck$1(instance, Constructor) {
+  var _typeof =
+    typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
+      ? function(obj) {
+          return typeof obj
+        }
+      : function(obj) {
+          return obj &&
+          typeof Symbol === 'function' &&
+          obj.constructor === Symbol &&
+          obj !== Symbol.prototype
+            ? 'symbol'
+            : typeof obj
+        }
+
+  var classCallCheck = function(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError('Cannot call a class as a function')
     }
   }
 
+  var inherits = function(subClass, superClass) {
+    if (typeof superClass !== 'function' && superClass !== null) {
+      throw new TypeError(
+        'Super expression must either be null or a function, not ' +
+          typeof superClass
+      )
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true,
+      },
+    })
+    if (superClass)
+      Object.setPrototypeOf
+        ? Object.setPrototypeOf(subClass, superClass)
+        : (subClass.__proto__ = superClass)
+  }
+
+  var possibleConstructorReturn = function(self, call) {
+    if (!self) {
+      throw new ReferenceError(
+        "this hasn't been initialised - super() hasn't been called"
+      )
+    }
+
+    return call && (typeof call === 'object' || typeof call === 'function')
+      ? call
+      : self
+  }
+
   var Environment = (function() {
     function Environment(externalEnvironment, fileManagers) {
-      _classCallCheck$1(this, Environment)
+      classCallCheck(this, Environment)
 
       this.fileManagers = fileManagers || []
       externalEnvironment = externalEnvironment || {}
@@ -131,16 +179,10 @@
 
   var environment = Environment
 
-  function _classCallCheck$2(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var sourceMapOutput = function sourceMapOutput(environment) {
     var SourceMapOutput = (function() {
       function SourceMapOutput(options) {
-        _classCallCheck$2(this, SourceMapOutput)
+        classCallCheck(this, SourceMapOutput)
 
         this._css = []
         this._rootNode = options.rootNode
@@ -328,19 +370,13 @@
     return SourceMapOutput
   }
 
-  function _classCallCheck$3(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var sourceMapBuilder = function sourceMapBuilder(
     SourceMapOutput,
     environment
   ) {
     var SourceMapBuilder = (function() {
       function SourceMapBuilder(options) {
-        _classCallCheck$3(this, SourceMapBuilder)
+        classCallCheck(this, SourceMapBuilder)
 
         this.options = options
       }
@@ -615,15 +651,9 @@
 
   //todo - do the same for the toCSS ?
 
-  function _classCallCheck$6(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var Node = (function() {
     function Node() {
-      _classCallCheck$6(this, Node)
+      classCallCheck(this, Node)
     }
 
     Node.prototype.toCSS = function toCSS(context) {
@@ -777,51 +807,13 @@
   }
   var node = Node
 
-  function _classCallCheck$7(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$1(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$1(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Alpha = (function(_Node) {
-    _inherits$1(Alpha, _Node)
+    inherits(Alpha, _Node)
 
     function Alpha(val) {
-      _classCallCheck$7(this, Alpha)
+      classCallCheck(this, Alpha)
 
-      var _this = _possibleConstructorReturn$1(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = val
       return _this
@@ -1008,53 +1000,15 @@
     yellowgreen: '#9acd32',
   }
 
-  function _classCallCheck$8(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$2(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$2(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   //
   // RGB Colors - #ff0014, #eee
   //
 
   var Color = (function(_Node) {
-    _inherits$2(Color, _Node)
+    inherits(Color, _Node)
 
     function Color(rgb, a, originalForm) {
-      _classCallCheck$8(this, Color)
+      classCallCheck(this, Color)
 
       //
       // The end goal here, is to parse the arguments
@@ -1062,7 +1016,7 @@
       //
       // This facilitates operations and conversions.
       //
-      var _this = _possibleConstructorReturn$2(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       if (Array.isArray(rgb)) {
         _this.rgb = rgb
@@ -1289,51 +1243,13 @@
   }
   var color = Color
 
-  function _classCallCheck$12(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$6(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$6(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Paren = (function(_Node) {
-    _inherits$6(Paren, _Node)
+    inherits(Paren, _Node)
 
     function Paren(node$$1) {
-      _classCallCheck$12(this, Paren)
+      classCallCheck(this, Paren)
 
-      var _this = _possibleConstructorReturn$6(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = node$$1
       return _this
@@ -1355,51 +1271,13 @@
   Paren.prototype.type = 'Paren'
   var paren = Paren
 
-  function _classCallCheck$13(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$7(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$7(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Combinator = (function(_Node) {
-    _inherits$7(Combinator, _Node)
+    inherits(Combinator, _Node)
 
     function Combinator(value) {
-      _classCallCheck$13(this, Combinator)
+      classCallCheck(this, Combinator)
 
-      var _this = _possibleConstructorReturn$7(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       if (value === ' ') {
         _this.value = ' '
@@ -1428,65 +1306,13 @@
   }
   var combinator = Combinator
 
-  var _typeof$2 =
-    typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
-      ? function(obj) {
-          return typeof obj
-        }
-      : function(obj) {
-          return obj &&
-          typeof Symbol === 'function' &&
-          obj.constructor === Symbol &&
-          obj !== Symbol.prototype
-            ? 'symbol'
-            : typeof obj
-        }
-
-  function _classCallCheck$11(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$5(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$5(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Element = (function(_Node) {
-    _inherits$5(Element, _Node)
+    inherits(Element, _Node)
 
     function Element(combinator$$1, value, index, currentFileInfo, info) {
-      _classCallCheck$11(this, Element)
+      classCallCheck(this, Element)
 
-      var _this = _possibleConstructorReturn$5(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.combinator =
         combinator$$1 instanceof combinator
@@ -1510,7 +1336,7 @@
       var value = this.value
       this.combinator = visitor.visit(this.combinator)
       if (
-        (typeof value === 'undefined' ? 'undefined' : _typeof$2(value)) ===
+        (typeof value === 'undefined' ? 'undefined' : _typeof(value)) ===
         'object'
       ) {
         this.value = visitor.visit(value)
@@ -1567,46 +1393,8 @@
   Element.prototype.type = 'Element'
   var element = Element
 
-  function _classCallCheck$10(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$4(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$4(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Selector = (function(_Node) {
-    _inherits$4(Selector, _Node)
+    inherits(Selector, _Node)
 
     function Selector(
       elements,
@@ -1616,9 +1404,9 @@
       currentFileInfo,
       visibilityInfo
     ) {
-      _classCallCheck$10(this, Selector)
+      classCallCheck(this, Selector)
 
-      var _this = _possibleConstructorReturn$4(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.elements = elements
       _this.extendList = extendList
@@ -1775,51 +1563,13 @@
   Selector.prototype.type = 'Selector'
   var selector = Selector
 
-  function _classCallCheck$16(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$10(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$10(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Value = (function(_Node) {
-    _inherits$10(Value, _Node)
+    inherits(Value, _Node)
 
     function Value(value) {
-      _classCallCheck$16(this, Value)
+      classCallCheck(this, Value)
 
-      var _this = _possibleConstructorReturn$10(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       if (!value) {
@@ -1862,51 +1612,13 @@
   Value.prototype.type = 'Value'
   var value = Value
 
-  function _classCallCheck$17(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$11(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$11(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Keyword = (function(_Node) {
-    _inherits$11(Keyword, _Node)
+    inherits(Keyword, _Node)
 
     function Keyword(value) {
-      _classCallCheck$17(this, Keyword)
+      classCallCheck(this, Keyword)
 
-      var _this = _possibleConstructorReturn$11(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       return _this
@@ -1929,46 +1641,8 @@
 
   var keyword = Keyword
 
-  function _classCallCheck$15(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$9(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$9(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Rule = (function(_Node) {
-    _inherits$9(Rule, _Node)
+    inherits(Rule, _Node)
 
     function Rule(
       name,
@@ -1980,9 +1654,9 @@
       inline,
       variable
     ) {
-      _classCallCheck$15(this, Rule)
+      classCallCheck(this, Rule)
 
-      var _this = _possibleConstructorReturn$9(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.name = name
       _this.value = value$$1 instanceof node ? value$$1 : new value([value$$1]) //value instanceof tree.Value || value instanceof tree.Ruleset ??
@@ -2221,51 +1895,13 @@
 
   var debugInfo_1 = debugInfo
 
-  function _classCallCheck$14(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$8(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$8(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Ruleset = (function(_Node) {
-    _inherits$8(Ruleset, _Node)
+    inherits(Ruleset, _Node)
 
     function Ruleset(selectors, rules, strictImports, visibilityInfo) {
-      _classCallCheck$14(this, Ruleset)
+      classCallCheck(this, Ruleset)
 
-      var _this = _possibleConstructorReturn$8(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.selectors = selectors
       _this.rules = rules
@@ -3138,46 +2774,8 @@
   Ruleset.prototype.isRulesetLike = true
   var ruleset = Ruleset
 
-  function _classCallCheck$9(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$3(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$3(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Directive = (function(_Node) {
-    _inherits$3(Directive, _Node)
+    inherits(Directive, _Node)
 
     function Directive(
       name,
@@ -3189,9 +2787,9 @@
       isRooted,
       visibilityInfo
     ) {
-      _classCallCheck$9(this, Directive)
+      classCallCheck(this, Directive)
 
-      var _this = _possibleConstructorReturn$3(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       var i = void 0
 
@@ -3369,51 +2967,13 @@
   Directive.prototype.type = 'Directive'
   var directive = Directive
 
-  function _classCallCheck$18(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$12(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$12(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var DetachedRuleset = (function(_Node) {
-    _inherits$12(DetachedRuleset, _Node)
+    inherits(DetachedRuleset, _Node)
 
     function DetachedRuleset(ruleset, frames) {
-      _classCallCheck$18(this, DetachedRuleset)
+      classCallCheck(this, DetachedRuleset)
 
-      var _this = _possibleConstructorReturn$12(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.ruleset = ruleset
       _this.frames = frames
@@ -3466,51 +3026,13 @@
     },
   }
 
-  function _classCallCheck$21(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$15(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$15(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Unit = (function(_Node) {
-    _inherits$15(Unit, _Node)
+    inherits(Unit, _Node)
 
     function Unit(numerator, denominator, backupUnit) {
-      _classCallCheck$21(this, Unit)
+      classCallCheck(this, Unit)
 
-      var _this = _possibleConstructorReturn$15(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.numerator = numerator ? numerator.slice(0).sort() : []
       _this.denominator = denominator ? denominator.slice(0).sort() : []
@@ -3653,55 +3175,17 @@
   Unit.prototype.type = 'Unit'
   var unit = Unit
 
-  function _classCallCheck$20(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$14(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$14(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   //
   // A number with a unit
   //
 
   var Dimension = (function(_Node) {
-    _inherits$14(Dimension, _Node)
+    inherits(Dimension, _Node)
 
     function Dimension(value, unit$$1) {
-      _classCallCheck$20(this, Dimension)
+      classCallCheck(this, Dimension)
 
-      var _this = _possibleConstructorReturn$14(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = parseFloat(value)
       _this.unit =
@@ -3898,51 +3382,13 @@
   Dimension.prototype.type = 'Dimension'
   var dimension = Dimension
 
-  function _classCallCheck$19(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$13(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$13(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Operation = (function(_Node) {
-    _inherits$13(Operation, _Node)
+    inherits(Operation, _Node)
 
     function Operation(op, operands, isSpaced) {
-      _classCallCheck$19(this, Operation)
+      classCallCheck(this, Operation)
 
-      var _this = _possibleConstructorReturn$13(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.op = op.trim()
       _this.operands = operands
@@ -3997,51 +3443,13 @@
 
   var operation = Operation
 
-  function _classCallCheck$22(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$16(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$16(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Variable = (function(_Node) {
-    _inherits$16(Variable, _Node)
+    inherits(Variable, _Node)
 
     function Variable(name, index, currentFileInfo) {
-      _classCallCheck$22(this, Variable)
+      classCallCheck(this, Variable)
 
-      var _this = _possibleConstructorReturn$16(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.name = name
       _this.index = index
@@ -4132,51 +3540,13 @@
   Variable.prototype.type = 'Variable'
   var variable = Variable
 
-  function _classCallCheck$23(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$17(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$17(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Attribute = (function(_Node) {
-    _inherits$17(Attribute, _Node)
+    inherits(Attribute, _Node)
 
     function Attribute(key, op, value) {
-      _classCallCheck$23(this, Attribute)
+      classCallCheck(this, Attribute)
 
-      var _this = _possibleConstructorReturn$17(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.key = key
       _this.op = op
@@ -4213,51 +3583,12 @@
   Attribute.prototype.type = 'Attribute'
   var attribute = Attribute
 
-  function _classCallCheck$25(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$19(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$19(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var JsEvalNode = (function(_Node) {
-    _inherits$19(JsEvalNode, _Node)
+    inherits(JsEvalNode, _Node)
 
     function JsEvalNode() {
-      _classCallCheck$25(this, JsEvalNode)
-
-      return _possibleConstructorReturn$19(this, _Node.apply(this, arguments))
+      classCallCheck(this, JsEvalNode)
+      return possibleConstructorReturn(this, _Node.apply(this, arguments))
     }
 
     JsEvalNode.prototype.evaluateJavaScript = function evaluateJavaScript(
@@ -4353,51 +3684,13 @@
 
   var jsEvalNode = JsEvalNode
 
-  function _classCallCheck$24(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$18(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$18(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Quoted = (function(_JsEvalNode) {
-    _inherits$18(Quoted, _JsEvalNode)
+    inherits(Quoted, _JsEvalNode)
 
     function Quoted(str, content, escaped, index, currentFileInfo) {
-      _classCallCheck$24(this, Quoted)
+      classCallCheck(this, Quoted)
 
-      var _this = _possibleConstructorReturn$18(this, _JsEvalNode.call(this))
+      var _this = possibleConstructorReturn(this, _JsEvalNode.call(this))
 
       _this.escaped = escaped == null ? true : escaped
       _this.value = content || ''
@@ -4475,51 +3768,13 @@
   Quoted.prototype.type = 'Quoted'
   var quoted = Quoted
 
-  function _classCallCheck$27(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$21(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$21(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Comment = (function(_Node) {
-    _inherits$21(Comment, _Node)
+    inherits(Comment, _Node)
 
     function Comment(value, isLineComment, index, currentFileInfo) {
-      _classCallCheck$27(this, Comment)
+      classCallCheck(this, Comment)
 
-      var _this = _possibleConstructorReturn$21(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       _this.isLineComment = isLineComment
@@ -4547,51 +3802,13 @@
   Comment.prototype.type = 'Comment'
   var comment = Comment
 
-  function _classCallCheck$26(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$20(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$20(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Expression = (function(_Node) {
-    _inherits$20(Expression, _Node)
+    inherits(Expression, _Node)
 
     function Expression(value) {
-      _classCallCheck$26(this, Expression)
+      classCallCheck(this, Expression)
 
-      var _this = _possibleConstructorReturn$20(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       if (!value) {
@@ -4660,15 +3877,9 @@
   Expression.prototype.type = 'Expression'
   var expression = Expression
 
-  function _classCallCheck$29(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var functionCaller = (function() {
     function functionCaller(name, context, index, currentFileInfo) {
-      _classCallCheck$29(this, functionCaller)
+      classCallCheck(this, functionCaller)
 
       this.name = name.toLowerCase()
       this.index = index
@@ -4719,55 +3930,17 @@
 
   var functionCaller_1 = functionCaller
 
-  function _classCallCheck$28(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$22(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$22(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   //
   // A function call node.
   //
 
   var Call = (function(_Node) {
-    _inherits$22(Call, _Node)
+    inherits(Call, _Node)
 
     function Call(name, args, index, currentFileInfo) {
-      _classCallCheck$28(this, Call)
+      classCallCheck(this, Call)
 
-      var _this = _possibleConstructorReturn$22(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.name = name
       _this.args = args
@@ -4876,51 +4049,13 @@
   Call.prototype.type = 'Call'
   var call = Call
 
-  function _classCallCheck$30(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$23(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$23(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var URL = (function(_Node) {
-    _inherits$23(URL, _Node)
+    inherits(URL, _Node)
 
     function URL(val, index, currentFileInfo, isEvald) {
-      _classCallCheck$30(this, URL)
+      classCallCheck(this, URL)
 
-      var _this = _possibleConstructorReturn$23(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = val
       _this.currentFileInfo = currentFileInfo
@@ -4984,46 +4119,8 @@
   URL.prototype.type = 'Url'
   var url = URL
 
-  function _classCallCheck$33(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$26(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$26(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Anonymous = (function(_Node) {
-    _inherits$26(Anonymous, _Node)
+    inherits(Anonymous, _Node)
 
     function Anonymous(
       value,
@@ -5033,9 +4130,9 @@
       rulesetLike,
       visibilityInfo
     ) {
-      _classCallCheck$33(this, Anonymous)
+      classCallCheck(this, Anonymous)
 
-      var _this = _possibleConstructorReturn$26(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       _this.index = index
@@ -5077,51 +4174,13 @@
   Anonymous.prototype.type = 'Anonymous'
   var anonymous = Anonymous
 
-  function _classCallCheck$32(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$25(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$25(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Media = (function(_Directive) {
-    _inherits$25(Media, _Directive)
+    inherits(Media, _Directive)
 
     function Media(value$$1, features, index, currentFileInfo, visibilityInfo) {
-      _classCallCheck$32(this, Media)
+      classCallCheck(this, Media)
 
-      var _this = _possibleConstructorReturn$25(this, _Directive.call(this))
+      var _this = possibleConstructorReturn(this, _Directive.call(this))
 
       _this.index = index
       _this.currentFileInfo = currentFileInfo
@@ -5295,44 +4354,6 @@
   Media.prototype.isRulesetLike = true
   var media = Media
 
-  function _classCallCheck$31(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$24(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$24(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   //
   // CSS @import node
   //
@@ -5347,7 +4368,7 @@
   //
 
   var Import = (function(_Node) {
-    _inherits$24(Import, _Node)
+    inherits(Import, _Node)
 
     function Import(
       path,
@@ -5357,9 +4378,9 @@
       currentFileInfo,
       visibilityInfo
     ) {
-      _classCallCheck$31(this, Import)
+      classCallCheck(this, Import)
 
-      var _this = _possibleConstructorReturn$24(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.options = options
       _this.index = index
@@ -5531,46 +4552,8 @@
   Import.prototype.type = 'Import'
   var _import = Import
 
-  function _classCallCheck$35(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$28(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$28(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Definition = (function(_Ruleset) {
-    _inherits$28(Definition, _Ruleset)
+    inherits(Definition, _Ruleset)
 
     function Definition(
       name,
@@ -5581,9 +4564,9 @@
       frames,
       visibilityInfo
     ) {
-      _classCallCheck$35(this, Definition)
+      classCallCheck(this, Definition)
 
-      var _this = _possibleConstructorReturn$28(this, _Ruleset.call(this))
+      var _this = possibleConstructorReturn(this, _Ruleset.call(this))
 
       _this.name = name
       _this.selectors = [
@@ -5890,51 +4873,13 @@
   Definition.prototype.evalFirst = true
   var mixinDefinition = Definition
 
-  function _classCallCheck$34(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$27(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$27(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var MixinCall = (function(_Node) {
-    _inherits$27(MixinCall, _Node)
+    inherits(MixinCall, _Node)
 
     function MixinCall(elements, args, index, currentFileInfo, important) {
-      _classCallCheck$34(this, MixinCall)
+      classCallCheck(this, MixinCall)
 
-      var _this = _possibleConstructorReturn$27(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.selector = new selector(elements)
       _this.arguments = args || []
@@ -6197,51 +5142,13 @@
   MixinCall.prototype.type = 'MixinCall'
   var mixinCall = MixinCall
 
-  function _classCallCheck$36(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$29(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$29(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var JavaScript = (function(_JsEvalNode) {
-    _inherits$29(JavaScript, _JsEvalNode)
+    inherits(JavaScript, _JsEvalNode)
 
     function JavaScript(string, escaped, index, currentFileInfo) {
-      _classCallCheck$36(this, JavaScript)
+      classCallCheck(this, JavaScript)
 
-      var _this = _possibleConstructorReturn$29(this, _JsEvalNode.call(this))
+      var _this = possibleConstructorReturn(this, _JsEvalNode.call(this))
 
       _this.escaped = escaped
       _this.expression = string
@@ -6271,51 +5178,13 @@
 
   var javascript = JavaScript
 
-  function _classCallCheck$37(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$30(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$30(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Assignment = (function(_Node) {
-    _inherits$30(Assignment, _Node)
+    inherits(Assignment, _Node)
 
     function Assignment(key, val) {
-      _classCallCheck$37(this, Assignment)
+      classCallCheck(this, Assignment)
 
-      var _this = _possibleConstructorReturn$30(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.key = key
       _this.value = val
@@ -6348,51 +5217,13 @@
   Assignment.prototype.type = 'Assignment'
   var assignment = Assignment
 
-  function _classCallCheck$38(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$31(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$31(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Condition = (function(_Node) {
-    _inherits$31(Condition, _Node)
+    inherits(Condition, _Node)
 
     function Condition(op, l, r, i, negate) {
-      _classCallCheck$38(this, Condition)
+      classCallCheck(this, Condition)
 
-      var _this = _possibleConstructorReturn$31(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.op = op.trim()
       _this.lvalue = l
@@ -6437,51 +5268,13 @@
   Condition.prototype.type = 'Condition'
   var condition = Condition
 
-  function _classCallCheck$39(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$32(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$32(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var UnicodeDescriptor = (function(_Node) {
-    _inherits$32(UnicodeDescriptor, _Node)
+    inherits(UnicodeDescriptor, _Node)
 
     function UnicodeDescriptor(value) {
-      _classCallCheck$39(this, UnicodeDescriptor)
+      classCallCheck(this, UnicodeDescriptor)
 
-      var _this = _possibleConstructorReturn$32(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = value
       return _this
@@ -6494,51 +5287,13 @@
 
   var unicodeDescriptor = UnicodeDescriptor
 
-  function _classCallCheck$40(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$33(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$33(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Negative = (function(_Node) {
-    _inherits$33(Negative, _Node)
+    inherits(Negative, _Node)
 
     function Negative(node$$1) {
-      _classCallCheck$40(this, Negative)
+      classCallCheck(this, Negative)
 
-      var _this = _possibleConstructorReturn$33(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.value = node$$1
       return _this
@@ -6562,46 +5317,8 @@
   Negative.prototype.type = 'Negative'
   var negative = Negative
 
-  function _classCallCheck$41(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$34(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$34(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var Extend = (function(_Node) {
-    _inherits$34(Extend, _Node)
+    inherits(Extend, _Node)
 
     function Extend(
       selector$$1,
@@ -6610,9 +5327,9 @@
       currentFileInfo,
       visibilityInfo
     ) {
-      _classCallCheck$41(this, Extend)
+      classCallCheck(this, Extend)
 
-      var _this = _possibleConstructorReturn$34(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.selector = selector$$1
       _this.option = option
@@ -6693,51 +5410,13 @@
   Extend.prototype.type = 'Extend'
   var extend = Extend
 
-  function _classCallCheck$42(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn$35(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits$35(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var RulesetCall = (function(_Node) {
-    _inherits$35(RulesetCall, _Node)
+    inherits(RulesetCall, _Node)
 
     function RulesetCall(variable$$1) {
-      _classCallCheck$42(this, RulesetCall)
+      classCallCheck(this, RulesetCall)
 
-      var _this = _possibleConstructorReturn$35(this, _Node.call(this))
+      var _this = possibleConstructorReturn(this, _Node.call(this))
 
       _this.variable = variable$$1
       _this.allowRoot = true
@@ -6797,26 +5476,6 @@
 
   var index$6 = tree
 
-  var _typeof$1 =
-    typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
-      ? function(obj) {
-          return typeof obj
-        }
-      : function(obj) {
-          return obj &&
-          typeof Symbol === 'function' &&
-          obj.constructor === Symbol &&
-          obj !== Symbol.prototype
-            ? 'symbol'
-            : typeof obj
-        }
-
-  function _classCallCheck$5(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var _visitArgs = { visitDeeper: true }
   var _hasIndexed = false
 
@@ -6832,7 +5491,7 @@
     for (key in parent) {
       if (parent.hasOwnProperty(key)) {
         child = parent[key]
-        switch (typeof child === 'undefined' ? 'undefined' : _typeof$1(child)) {
+        switch (typeof child === 'undefined' ? 'undefined' : _typeof(child)) {
           case 'function':
             // ignore bound functions directly on tree which do not have a prototype
             // or aren't nodes
@@ -6851,7 +5510,7 @@
 
   var Visitor = (function() {
     function Visitor(implementation) {
-      _classCallCheck$5(this, Visitor)
+      classCallCheck(this, Visitor)
 
       this._implementation = implementation
       this._visitFnCache = []
@@ -6984,15 +5643,9 @@
 
   var visitor = Visitor
 
-  function _classCallCheck$43(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var ImportSequencer = (function() {
     function ImportSequencer(onSequencerEmpty) {
-      _classCallCheck$43(this, ImportSequencer)
+      classCallCheck(this, ImportSequencer)
 
       this.imports = []
       this.variableImports = []
@@ -7280,15 +5933,9 @@
   }
   var importVisitor = ImportVisitor
 
-  function _classCallCheck$44(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var SetTreeVisibilityVisitor = (function() {
     function SetTreeVisibilityVisitor(visible) {
-      _classCallCheck$44(this, SetTreeVisibilityVisitor)
+      classCallCheck(this, SetTreeVisibilityVisitor)
 
       this.visible = visible
     }
@@ -7336,17 +5983,11 @@
 
   var setTreeVisibilityVisitor = SetTreeVisibilityVisitor
 
-  function _classCallCheck$45(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   /*jshint loopfunc:true */
 
   var ExtendFinderVisitor = (function() {
     function ExtendFinderVisitor() {
-      _classCallCheck$45(this, ExtendFinderVisitor)
+      classCallCheck(this, ExtendFinderVisitor)
 
       this._visitor = new visitor(this)
       this.contexts = []
@@ -7472,7 +6113,7 @@
 
   var ProcessExtendsVisitor = (function() {
     function ProcessExtendsVisitor() {
-      _classCallCheck$45(this, ProcessExtendsVisitor)
+      classCallCheck(this, ProcessExtendsVisitor)
 
       this._visitor = new visitor(this)
     }
@@ -8039,15 +6680,9 @@
 
   var extendVisitor = ProcessExtendsVisitor
 
-  function _classCallCheck$46(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var JoinSelectorVisitor = (function() {
     function JoinSelectorVisitor() {
-      _classCallCheck$46(this, JoinSelectorVisitor)
+      classCallCheck(this, JoinSelectorVisitor)
 
       this.contexts = [[]]
       this._visitor = new visitor(this)
@@ -8131,15 +6766,9 @@
 
   var joinSelectorVisitor = JoinSelectorVisitor
 
-  function _classCallCheck$47(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var CSSVisitorUtils = (function() {
     function CSSVisitorUtils(context) {
-      _classCallCheck$47(this, CSSVisitorUtils)
+      classCallCheck(this, CSSVisitorUtils)
 
       this._visitor = new visitor(this)
       this._context = context
@@ -8596,20 +7225,6 @@
 
   var index$4 = visitors
 
-  var _typeof =
-    typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
-      ? function(obj) {
-          return typeof obj
-        }
-      : function(obj) {
-          return obj &&
-          typeof Symbol === 'function' &&
-          obj.constructor === Symbol &&
-          obj !== Symbol.prototype
-            ? 'symbol'
-            : typeof obj
-        }
-
   var transformTree = function transformTree(root, options) {
     options = options || {}
     var evaldRoot = void 0
@@ -8691,16 +7306,10 @@
     return evaldRoot
   }
 
-  function _classCallCheck$4(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var parseTree = function parseTree(SourceMapBuilder) {
     var ParseTree = (function() {
       function ParseTree(root, imports) {
-        _classCallCheck$4(this, ParseTree)
+        classCallCheck(this, ParseTree)
 
         this.root = root
         this.imports = imports
@@ -11571,12 +10180,6 @@
     }
   })
 
-  function _classCallCheck$48(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var importManager = function importManager(environment) {
     // FileInfo = {
     //  'relativeUrls' - option - whether to adjust URL's to be relative
@@ -11589,7 +10192,7 @@
 
     var ImportManager = (function() {
       function ImportManager(context, rootFileInfo) {
-        _classCallCheck$48(this, ImportManager)
+        classCallCheck(this, ImportManager)
 
         this.rootFilename = rootFileInfo.filename
         this.paths = context.paths || [] // Search paths, when importing
@@ -11757,15 +10360,9 @@
     unitConversions: unitConversions,
   }
 
-  function _classCallCheck$49(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   var abstractFileManager = (function() {
     function abstractFileManager() {
-      _classCallCheck$49(this, abstractFileManager)
+      classCallCheck(this, abstractFileManager)
     }
 
     abstractFileManager.prototype.getPath = function getPath(filename) {
@@ -12964,18 +11561,12 @@
     return render
   }
 
-  function _classCallCheck$50(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
   /**
  * Plugin Manager
  */
   var PluginManager = (function() {
     function PluginManager(less) {
-      _classCallCheck$50(this, PluginManager)
+      classCallCheck(this, PluginManager)
 
       this.less = less
       this.visitors = []
@@ -13298,51 +11889,12 @@
     }
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError(
-        "this hasn't been initialised - super() hasn't been called"
-      )
-    }
-    return call && (typeof call === 'object' || typeof call === 'function')
-      ? call
-      : self
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-      throw new TypeError(
-        'Super expression must either be null or a function, not ' +
-          typeof superClass
-      )
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-      },
-    })
-    if (superClass)
-      Object.setPrototypeOf
-        ? Object.setPrototypeOf(subClass, superClass)
-        : (subClass.__proto__ = superClass)
-  }
-
   var NotSupportedFileManager = (function(_AbstractFileManager) {
-    _inherits(NotSupportedFileManager, _AbstractFileManager)
+    inherits(NotSupportedFileManager, _AbstractFileManager)
 
     function NotSupportedFileManager() {
-      _classCallCheck(this, NotSupportedFileManager)
-
-      return _possibleConstructorReturn(
+      classCallCheck(this, NotSupportedFileManager)
+      return possibleConstructorReturn(
         this,
         _AbstractFileManager.apply(this, arguments)
       )

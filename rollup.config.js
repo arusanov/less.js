@@ -27,6 +27,7 @@ export default {
           },
         ],
       ],
+      plugins: ['external-helpers'],
     }),
   ],
 }

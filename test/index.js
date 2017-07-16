@@ -123,7 +123,7 @@ lessTester.finished().then(() => {
   /***
    * TODO: Some of these test cant be run in browser
    */
-  const browserTester = lessTest(require('../dist/less'))
+  const browserTester = lessTest(require('../dist/less.min'))
   console.log(`\n${stylize('Less browser', 'underline')}\n`)
   browserTester.prepBomTest()
   browserTester.runTestSet({

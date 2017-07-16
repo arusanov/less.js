@@ -24,6 +24,7 @@
   "license": "Apache-2.0",
   "main": "index",
   "browser": "./dist/less.js",
+  "minified:main": "dist/less.min.js",
   "directories": {
     "test": "./test"
   },
@@ -31,9 +32,11 @@
     "node": ">=7.10"
   },
   "scripts": {
-    "test": "npm run transpile && node test",
+    "test": "npm run transpile && node test && npm run test:size",
+    "test:size": "bundlesize",
     "precommit": "npm run transpile && lint-staged",
-    "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js"
+    "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js && npm run minify",
+    "minify": "uglifyjs dist/less.js -c collapse_vars,evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/less.min.js -p relative --in-source-map dist/less.js.map --source-map dist/less.min.js.map"
   },
   "lint-staged": {
     "*.js": [
@@ -41,6 +44,12 @@
       "git add"
     ]
   },
+  "bundlesize": [
+    {
+      "path": "./dist/less.min.js",
+      "threshold": "40Kb"
+    }
+  ],
   "optionalDependencies": {
     "errno": "^0.1.1",
     "mime": "^1.2.11",
@@ -48,16 +57,19 @@
     "source-map": "^0.5.3"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.5.1",
     "diff": "^3.3.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
     "prettier": "^1.5.3",
-    "babel-core": "^6.24.1",
-    "babel-preset-env": "^1.5.1",
     "rollup": "^0.40.0",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-commonjs": "^8.0.2"
+    "uglify-js": "^2.7.5",
+    "bundlesize": "^0.6.1"
   },
   "keywords": [
     "compile less",
