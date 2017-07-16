@@ -1,7 +1,7 @@
-var lessTest = require("./less-test"),
-    lessTester = lessTest(),
-    path = require("path"),
-    stylize = require('../lib/less-node/lessc-helper').stylize;
+const lessTest = require('./less-test'),
+  lessTester = lessTest(),
+  path = require('path'),
+  stylize = (msg, color) => msg
 
 function getErrorPathReplacementFunction(dir) {
     return function(input, baseDir) {
