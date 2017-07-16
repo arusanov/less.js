@@ -34,7 +34,14 @@
     "node": ">=7.10"
   },
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier  --single-quote --trailing-comma es5 --no-semi --write",
+      "git add"
+    ]
   },
   "optionalDependencies": {
     "errno": "^0.1.1",
@@ -43,7 +50,10 @@
     "source-map": "^0.5.3"
   },
   "devDependencies": {
-    "diff": "^3.3.0"
+    "diff": "^3.3.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.1",
+    "prettier": "^1.5.3"
   },
   "keywords": [
     "compile less",
