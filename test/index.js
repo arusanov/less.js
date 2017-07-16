@@ -53,6 +53,7 @@ lessTester.runTestSet({plugin: 'test/plugins/preprocess/'}, "preProcessorPlugin/
 lessTester.runTestSet({plugin: 'test/plugins/visitor/'}, "visitorPlugin/");
 lessTester.runTestSet({plugin: 'test/plugins/filemanager/'}, "filemanagerPlugin/");
 lessTester.runTestSet({}, "no-strict-math/");
+lessTester.runTestSet({simplify: true}, "simplify/");
 lessTester.testSyncronous({syncImport: true}, "import");
 lessTester.testSyncronous({syncImport: true}, "css");
 lessTester.testNoOptions();

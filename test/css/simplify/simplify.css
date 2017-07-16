@@ -1,0 +1,12 @@
+@mainVar: #fff;
+.main-@{mainVar} {
+  left: 1px;
+  border-color: mix(@mainVar, red);
+  color: @mainVar;
+  @{mainVar}-left: middle;
+}
+@media all and (max-width: @mainVar) {
+  .hohoh {
+    color: red;
+  }
+}
