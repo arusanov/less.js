@@ -25,3 +25,4 @@ test/less-bom
 # gradle
 .gradle
 out
+!/lib/less-node/environment.js

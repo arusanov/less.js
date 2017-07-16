@@ -1,7 +1,7 @@
 const lessTest = require('./less-test'),
   lessTester = lessTest(),
   path = require('path'),
-  stylize = (msg, color) => msg
+  stylize = require('./stylize')
 
 function getErrorPathReplacementFunction(dir) {
     return function(input, baseDir) {

@@ -7,7 +7,7 @@ module.exports = function () {
   let doBomTest = false
 
   const less = require('../lib/less-node')
-  const stylize = (msg, color) => msg
+  const stylize = require('./stylize')
 
   const globals = Object.keys(global)
 
@@ -257,9 +257,9 @@ module.exports = function () {
             process.stdout.write('- ' + path.join(baseFolder, css_name) + ': ')
 
             css = css && doReplacements(css, path.join(baseFolder, foldername))
-            if (result.css === css) { ok('OK') }
+            if (result.css.trim() === css.trim()) { ok('OK') }
             else {
-              difference('FAIL', css, result.css)
+              difference('FAIL', css.trim(), result.css.trim())
             }
             release()
           })
