@@ -1,12 +1,16 @@
 /*jshint latedef: nofunc */
 
-module.exports = () => {
+module.exports = (less = require('../lib/less-node')) => {
   const path = require('path')
   const fs = require('fs')
   const copyBom = require('./copy-bom')()
   let doBomTest = false
+  let endresolve, endreject
+  const endPromise = new Promise((resolve, reject) => {
+    endresolve = resolve
+    endreject = reject
+  })
 
-  const less = require('../lib/less-node')
   const stylize = require('./stylize')
 
   const globals = Object.keys(global)
@@ -413,7 +417,7 @@ module.exports = () => {
 
   function finished() {
     isFinished = true
-    endTest()
+    return endTest()
   }
 
   function endTest() {
@@ -421,15 +425,6 @@ module.exports = () => {
       const leaked = checkGlobalLeaks()
 
       process.stdout.write('\n')
-      if (failedTests > 0) {
-        process.stdout.write(
-          `${failedTests + stylize(' Failed', 'red')}, ${passedTests} passed\n`
-        )
-      } else {
-        process.stdout.write(
-          `${stylize('All Passed ', 'green') + passedTests} run\n`
-        )
-      }
       if (leaked.length > 0) {
         process.stdout.write('\n')
         process.stdout.write(
@@ -442,7 +437,20 @@ module.exports = () => {
           process.reallyExit(1)
         })
       }
+
+      if (failedTests > 0) {
+        process.stdout.write(
+          `${failedTests + stylize(' Failed', 'red')}, ${passedTests} passed\n`
+        )
+        return endreject(new Error('failed'))
+      } else {
+        process.stdout.write(
+          `${stylize('All Passed ', 'green') + passedTests} run\n`
+        )
+        return endresolve()
+      }
     }
+    return endPromise
   }
 
   function contains(fullArray, obj) {

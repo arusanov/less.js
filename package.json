@@ -23,19 +23,17 @@
   },
   "license": "Apache-2.0",
   "main": "index",
+  "browser": "./dist/less.js",
   "directories": {
     "test": "./test"
   },
-  "jam": {
-    "main": "./dist/less.js"
-  },
-  "browser": "./dist/less.js",
   "engines": {
     "node": ">=7.10"
   },
   "scripts": {
-    "test": "node test",
-    "precommit": "lint-staged"
+    "test": "npm run transpile && node test",
+    "precommit": "npm run transpile && lint-staged",
+    "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js"
   },
   "lint-staged": {
     "*.js": [
@@ -53,7 +51,13 @@
     "diff": "^3.3.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
-    "prettier": "^1.5.3"
+    "prettier": "^1.5.3",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "rollup": "^0.40.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-commonjs": "^8.0.2"
   },
   "keywords": [
     "compile less",
