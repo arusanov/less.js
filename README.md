@@ -7,6 +7,7 @@ This is the fork of JavaScript, official, 2.7.2 version of Less with few additio
 ### Simplify option
 
 New option `simplify:boolean` will transform all stylesheet except for root variables.
+
 From:
 ```less
 @mainVar: #fff;
@@ -39,6 +40,10 @@ It will produce following less
   }
 }
 ```
+
+Also there's 2 additional options:
+1. `simplifyLevel: number` which level is root. default:1
+1. `simplifyFilter: Regex` filter variables to keep, default: null
 
 ### Rollup browser build without heavy stuff
 
