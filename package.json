@@ -22,7 +22,7 @@
     "raw": "https://raw.githubusercontent.com/less/less.js/master/"
   },
   "license": "Apache-2.0",
-  "main": "index",
+  "main": "./dist/less.js",
   "browser": "./dist/less.js",
   "minified:main": "dist/less.min.js",
   "directories": {
