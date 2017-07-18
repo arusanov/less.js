@@ -35,7 +35,7 @@
     "test": "npm run transpile && node test && npm run test:size",
     "test:size": "bundlesize",
     "preprecommit": "npm run transpile",
-    "precommit": "lint-staged && npm run transpile && git add",
+    "precommit": "lint-staged && npm run transpile && git add .",
     "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js && npm run minify",
     "minify": "uglifyjs dist/less.js -c collapse_vars,evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/less.min.js -p relative --in-source-map dist/less.js.map --source-map dist/less.min.js.map"
   },
