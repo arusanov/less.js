@@ -543,8 +543,12 @@ contexts.Eval.prototype.outOfParenthesis = function () {
   this.parensStack.pop();
 };
 
+contexts.Eval.prototype.isInParens = function () {
+  return !!(this.parensStack && this.parensStack.length > 0);
+};
+
 contexts.Eval.prototype.isMathOn = function () {
-  return this.strictMath ? this.parensStack && this.parensStack.length : true;
+  return this.strictMath ? this.isInParens() : true;
 };
 
 contexts.Eval.prototype.isPathRelative = function (path) {
@@ -3002,6 +3006,8 @@ var Operation = function (_Node) {
   inherits(Operation, _Node);
 
   function Operation(op, operands, isSpaced) {
+    var isParens = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var isRootVariable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
     classCallCheck(this, Operation);
 
     var _this = possibleConstructorReturn(this, _Node.call(this));
@@ -3009,6 +3015,8 @@ var Operation = function (_Node) {
     _this.op = op.trim();
     _this.operands = operands;
     _this.isSpaced = isSpaced;
+    _this.isRootVariable = isRootVariable;
+    _this.isParens = isParens;
     return _this;
   }
 
@@ -3019,8 +3027,8 @@ var Operation = function (_Node) {
   Operation.prototype.eval = function _eval(context) {
     var a = this.operands[0].eval(context);
     var b = this.operands[1].eval(context);
-
-    if (context.isMathOn() && !a.isRootVariable && !b.isRootVariable) {
+    var isRootVariable = !!(a.isRootVariable || b.isRootVariable);
+    if (context.isMathOn() && !isRootVariable) {
       if (a instanceof dimension && b instanceof color) {
         a = a.toColor();
       }
@@ -3029,7 +3037,7 @@ var Operation = function (_Node) {
       }
       if (!a.operate) {
         if (context.simplify) {
-          return new Operation(this.op, [a, b], this.isSpaced);
+          return new Operation(this.op, [a, b], this.isSpaced, this.isParens, isRootVariable);
         } else {
           throw {
             type: 'Operation',
@@ -3040,11 +3048,14 @@ var Operation = function (_Node) {
 
       return a.operate(context, this.op, b);
     } else {
-      return new Operation(this.op, [a, b], this.isSpaced);
+      return new Operation(this.op, [a, b], this.isSpaced, context.isInParens(), isRootVariable);
     }
   };
 
   Operation.prototype.genCSS = function genCSS(context, output) {
+    if (this.isParens) {
+      output.add('(');
+    }
     this.operands[0].genCSS(context, output);
     if (this.isSpaced) {
       output.add(' ');
@@ -3054,6 +3065,9 @@ var Operation = function (_Node) {
       output.add(' ');
     }
     this.operands[1].genCSS(context, output);
+    if (this.isParens) {
+      output.add(')');
+    }
   };
 
   return Operation;
@@ -3109,7 +3123,7 @@ var Variable = function (_Node) {
 
           //Add genCSS and toCSS
           current.genCSS = function (context, output) {
-            if (context.frames) {
+            if (context && context.frames) {
               //In eval context
               output.add(this.toCSS(context));
             } else {
