@@ -3048,7 +3048,7 @@ var Operation = function (_Node) {
 
       return a.operate(context, this.op, b);
     } else {
-      return new Operation(this.op, [a, b], this.isSpaced, context.isInParens(), isRootVariable);
+      return new Operation(this.op, [a, b], this.isSpaced, a.parensInOp && b.parensInOp || context.isInParens(), isRootVariable);
     }
   };
 
