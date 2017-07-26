@@ -3006,8 +3006,7 @@ var Operation = function (_Node) {
   inherits(Operation, _Node);
 
   function Operation(op, operands, isSpaced) {
-    var isParens = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-    var isRootVariable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+    var isRootVariable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     classCallCheck(this, Operation);
 
     var _this = possibleConstructorReturn(this, _Node.call(this));
@@ -3016,7 +3015,6 @@ var Operation = function (_Node) {
     _this.operands = operands;
     _this.isSpaced = isSpaced;
     _this.isRootVariable = isRootVariable;
-    _this.isParens = isParens;
     return _this;
   }
 
@@ -3037,7 +3035,7 @@ var Operation = function (_Node) {
       }
       if (!a.operate) {
         if (context.simplify) {
-          return new Operation(this.op, [a, b], this.isSpaced, this.isParens, isRootVariable);
+          return new Operation(this.op, [a, b], this.isSpaced, isRootVariable);
         } else {
           throw {
             type: 'Operation',
@@ -3048,14 +3046,15 @@ var Operation = function (_Node) {
 
       return a.operate(context, this.op, b);
     } else {
-      return new Operation(this.op, [a, b], this.isSpaced, a.parensInOp && b.parensInOp || context.isInParens(), isRootVariable);
+      var cloneOp = new Operation(this.op, [a, b], this.isSpaced, isRootVariable);
+      if (a.parensInOp && b.parensInOp || context.isInParens()) {
+        return new paren(cloneOp);
+      }
+      return cloneOp;
     }
   };
 
   Operation.prototype.genCSS = function genCSS(context, output) {
-    if (this.isParens) {
-      output.add('(');
-    }
     this.operands[0].genCSS(context, output);
     if (this.isSpaced) {
       output.add(' ');
@@ -3065,9 +3064,6 @@ var Operation = function (_Node) {
       output.add(' ');
     }
     this.operands[1].genCSS(context, output);
-    if (this.isParens) {
-      output.add(')');
-    }
   };
 
   return Operation;
