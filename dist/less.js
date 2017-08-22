@@ -510,6 +510,7 @@ contexts.Parse = function (options) {
 var evalCopyProperties = ['paths', // additional include paths
 'compress', // whether to compress
 'ieCompat', // whether to enforce IE compatibility (IE8 data-uri)
+'disableMath', // whether math enabled
 'strictMath', // whether math has to be within parenthesis
 'strictUnits', // whether units need to evaluate correctly
 'sourceMap', // whether to output a source map
@@ -548,7 +549,7 @@ contexts.Eval.prototype.isInParens = function () {
 };
 
 contexts.Eval.prototype.isMathOn = function () {
-  return this.strictMath ? this.isInParens() : true;
+  return !this.disableMath && (this.strictMath ? this.isInParens() : true);
 };
 
 contexts.Eval.prototype.isPathRelative = function (path) {
