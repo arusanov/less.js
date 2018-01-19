@@ -3,9 +3,10 @@ import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 
 export default {
-  useStrict: true,
-  format: 'umd',
-  entry: 'lib/less-browser/index.js',
+  output: {
+    format: 'umd',
+  },
+  input: 'lib/less-browser/index.js',
   plugins: [
     nodeResolve({
       main: true,

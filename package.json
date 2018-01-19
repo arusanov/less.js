@@ -29,13 +29,14 @@
     "test": "./test"
   },
   "engines": {
-    "node": ">=7.10"
+    "node": ">=8.9"
   },
   "scripts": {
     "test": "npm run transpile && node test && npm run test:size",
     "test:size": "bundlesize",
     "preprecommit": "npm run transpile",
     "precommit": "lint-staged && npm run transpile && git add .",
+    "watch": "rollup --watch -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js",
     "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js && npm run minify",
     "minify": "uglifyjs dist/less.js -c collapse_vars,evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/less.min.js -p relative --in-source-map dist/less.js.map --source-map dist/less.min.js.map"
   },
@@ -63,14 +64,14 @@
     "babel-preset-env": "^1.5.1",
     "diff": "^3.3.0",
     "husky": "^0.14.3",
-    "lint-staged": "^4.0.1",
+    "lint-staged": "^6.0.0",
     "prettier": "^1.5.3",
-    "rollup": "^0.40.0",
-    "rollup-plugin-babel": "^2.7.1",
+    "rollup": "^0.54.0",
+    "rollup-plugin-babel": "^3.0.0",
     "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "uglify-js": "^2.7.5",
-    "bundlesize": "^0.6.1"
+    "bundlesize": "^0.15.0"
   },
   "keywords": [
     "compile less",
