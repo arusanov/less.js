@@ -5,7 +5,8 @@ test/sourcemaps/**/*.map
 test/sourcemaps/*.map
 test/sourcemaps/*.css
 test/less-bom
-
+dist/
+.npmrc
 
 ### Node template
 # Logs
