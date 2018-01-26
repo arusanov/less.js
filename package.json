@@ -22,49 +22,56 @@
     "raw": "https://raw.githubusercontent.com/less/less.js/master/"
   },
   "license": "Apache-2.0",
-  "bin": {
-    "lessc": "./bin/lessc"
-  },
-  "main": "index",
+  "main": "./dist/less.js",
+  "browser": "./dist/less.js",
+  "minified:main": "dist/less.min.js",
   "directories": {
     "test": "./test"
   },
-  "jam": {
-    "main": "./dist/less.js"
-  },
-  "browser": "./dist/less.js",
   "engines": {
-    "node": ">=0.12"
+    "node": ">=8.9"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "npm run transpile && node test && npm run test:size",
+    "test:size": "bundlesize",
+    "preprecommit": "npm run transpile",
+    "precommit": "lint-staged && npm run transpile && git add .",
+    "watch": "rollup --watch -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js",
+    "transpile": "rollup -c rollup.config.js -m dist/less.js.map -n less -o dist/less.js && npm run minify",
+    "minify": "uglifyjs dist/less.js -c collapse_vars,evaluate,screw_ie8,unsafe,loops=false,keep_fargs=false,pure_getters,unused,dead_code -m -o dist/less.min.js -p relative --in-source-map dist/less.js.map --source-map dist/less.min.js.map"
   },
+  "lint-staged": {
+    "lib/**/*.js": [
+      "prettier --single-quote --trailing-comma es5 --no-semi --write",
+      "git add"
+    ]
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/less.min.js",
+      "threshold": "40Kb"
+    }
+  ],
   "optionalDependencies": {
     "errno": "^0.1.1",
-    "graceful-fs": "^4.1.2",
-    "image-size": "~0.5.0",
     "mime": "^1.2.11",
     "mkdirp": "^0.5.0",
-    "promise": "^7.1.1",
-    "source-map": "^0.5.3",
-    "request": "^2.72.0"
+    "source-map": "^0.5.3"
   },
   "devDependencies": {
-    "diff": "^2.2.2",
-    "grunt": "~0.4.5",
-    "grunt-browserify": "^5.0.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-jasmine": "^1.0.3",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.1",
-    "grunt-jscs": "^2.8.0",
-    "grunt-saucelabs": "^8.6.2",
-    "grunt-shell": "^1.3.0",
-    "jit-grunt": "^0.10.0",
-    "phantomjs-prebuilt": "^2.1.7",
-    "time-grunt": "^1.3.0"
+    "babel-core": "^6.24.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.5.1",
+    "diff": "^3.3.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.5.3",
+    "rollup": "^0.54.0",
+    "rollup-plugin-babel": "^3.0.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "uglify-js": "^2.7.5",
+    "bundlesize": "^0.15.0"
   },
   "keywords": [
     "compile less",
